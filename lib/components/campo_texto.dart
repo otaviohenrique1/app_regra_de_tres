@@ -7,12 +7,10 @@ class CampoTexto extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
-    required this.label,
     required this.keyboardType,
     this.validator,
   });
 
-  final String label;
   final TextEditingController controller;
   final String hintText;
   final String? Function(String?)? validator;
@@ -22,20 +20,8 @@ class CampoTexto extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.only(bottom: 8),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              label,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: fontWeightBold,
-              ),
-            ),
-          ),
-        ),
         TextFormField(
+          keyboardType: keyboardType,
           controller: controller,
           validator: validator,
           decoration: InputDecoration(

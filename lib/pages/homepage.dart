@@ -1,8 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:app_regra_de_tres/components/botao.dart';
 import 'package:app_regra_de_tres/components/campo_texto.dart';
 import 'package:app_regra_de_tres/utils/validator.dart';
-import 'package:flutter/material.dart';
-import 'package:app_regra_de_tres/components/titulo.dart';
 import 'package:app_regra_de_tres/styles/colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,22 +16,27 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _campoAController = TextEditingController();
   final TextEditingController _campoBController = TextEditingController();
   final TextEditingController _campoCController = TextEditingController();
-  final TextEditingController _campoDController = TextEditingController();
+  final TextEditingController _campoXController = TextEditingController();
 
   @override
   void dispose() {
     _campoAController.dispose();
     _campoBController.dispose();
     _campoCController.dispose();
-    _campoDController.dispose();
+    _campoXController.dispose();
     super.dispose();
   }
 
-  void _calcularRegraDeTres() {
-    setState(() {
-      //
-    });
-  }
+  double a = 0;
+  double b = 0;
+  double c = 0;
+  String x = "";
+
+  String valorLabelA = "A";
+  String valorLabelB = "B";
+  String valorLabelC = "C";
+  String valorLabelX = "X";
+  String valorLabelResultado = "??";
 
   @override
   Widget build(BuildContext context) {
@@ -44,107 +48,212 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                Row(
+          child: Column(
+            children: [
+              Form(
+                key: formKey,
+                child: Column(
                   children: [
-                    Expanded(
-                      child: CampoTexto(
-                        label: "Campo A",
-                        hintText: "Campo A",
-                        controller: _campoAController,
-                        keyboardType: TextInputType.number,
-                        validator: validaCampoVazio,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Column(
+                    Row(
                       children: [
-                        const SizedBox(height: 32),
+                        Expanded(
+                          child: CampoTexto(
+                            hintText: "A",
+                            controller: _campoAController,
+                            keyboardType: TextInputType.number,
+                            validator: validaCampoVazio,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
                         Container(
                           width: 32,
                           height: 8,
                           color: preto,
                         ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: CampoTexto(
+                            hintText: "B",
+                            controller: _campoBController,
+                            keyboardType: TextInputType.number,
+                            validator: validaCampoVazio,
+                          ),
+                        ),
                       ],
                     ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: CampoTexto(
-                        label: "Campo B",
-                        hintText: "Campo B",
-                        controller: _campoBController,
-                        keyboardType: TextInputType.number,
-                        validator: validaCampoVazio,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CampoTexto(
-                        label: "Campo C",
-                        hintText: "Campo C",
-                        controller: _campoCController,
-                        keyboardType: TextInputType.number,
-                        validator: validaCampoVazio,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Column(
+                    const SizedBox(height: 16),
+                    Row(
                       children: [
-                        const SizedBox(height: 32),
+                        Expanded(
+                          child: CampoTexto(
+                            hintText: "C",
+                            controller: _campoCController,
+                            keyboardType: TextInputType.number,
+                            validator: validaCampoVazio,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
                         Container(
                           width: 32,
                           height: 8,
                           color: preto,
                         ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: CampoTexto(
+                            hintText: "X",
+                            controller: _campoXController,
+                            keyboardType: TextInputType.text,
+                            validator: validaCampoVazio,
+                          ),
+                        ),
                       ],
                     ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: CampoTexto(
-                        label: "Variavel",
-                        hintText: "Variavel",
-                        controller: _campoDController,
-                        keyboardType: TextInputType.text,
-                        validator: validaCampoVazio,
-                      ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Botao(
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                setState(() {
+                                  a = double.parse(_campoAController.text);
+                                  b = double.parse(_campoBController.text);
+                                  c = double.parse(_campoCController.text);
+                                  x = _campoXController.text;
+
+                                  valorLabelA = a.toString();
+                                  valorLabelB = b.toString();
+                                  valorLabelC = c.toString();
+                                  valorLabelX = x;
+
+                                  double resultado = (b * c) / a;
+                                  valorLabelResultado = resultado.toString();
+                                });
+                              }
+                            },
+                            label: "Calcular",
+                            backgroundColor: azul1,
+                            fontColor: branco,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Botao(
+                            onPressed: () {
+                              setState(() {
+                                formKey.currentState!.reset();
+                                a = 0;
+                                b = 0;
+                                c = 0;
+                                x = "";
+                                valorLabelA = "A";
+                                valorLabelB = "B";
+                                valorLabelC = "C";
+                                valorLabelX = "X";
+                                valorLabelResultado = "??";
+                                _campoAController.text = "";
+                                _campoBController.text = "";
+                                _campoCController.text = "";
+                                _campoXController.text = "";
+                              });
+                            },
+                            label: "Limpar",
+                            backgroundColor: cinza1,
+                            fontColor: branco,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 32),
-                Row(
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 16),
+                child: Divider(color: preto),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    valorLabelA,
+                    style: const TextStyle(fontSize: 20),
+                    softWrap: true,
+                  ),
+                  Container(
+                    width: 50,
+                    height: 2,
+                    color: preto,
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                  ),
+                  Text(
+                    valorLabelB,
+                    style: const TextStyle(fontSize: 20),
+                    softWrap: true,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    valorLabelC,
+                    style: const TextStyle(fontSize: 20),
+                    softWrap: true,
+                  ),
+                  Container(
+                    width: 50,
+                    height: 2,
+                    color: preto,
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                  ),
+                  Text(
+                    valorLabelX,
+                    style: const TextStyle(fontSize: 20),
+                    softWrap: true,
+                  ),
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      child: Botao(
-                        onPressed: () {
-                          if (formKey.currentState!.validate()) {}
-                        },
-                        label: "Calcular",
-                        backgroundColor: azul1,
-                        fontColor: branco,
-                      ),
+                    const Text(
+                      "X = ",
+                      style: TextStyle(fontSize: 20),
+                      softWrap: true,
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Botao(
-                        onPressed: () {
-                          formKey.currentState!.reset();
-                        },
-                        label: "Limpar",
-                        backgroundColor: cinza1,
-                        fontColor: branco,
-                      ),
+                    Column(
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(color: preto, width: 2),
+                            ),
+                          ),
+                          child: Text(
+                            "($valorLabelB * $valorLabelC)",
+                            style: const TextStyle(fontSize: 20),
+                            softWrap: true,
+                          ),
+                        ),
+                        Text(
+                          valorLabelA,
+                          style: const TextStyle(fontSize: 20),
+                          softWrap: true,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+              Text(
+                "$valorLabelX = $valorLabelResultado",
+                style: const TextStyle(fontSize: 20),
+                softWrap: true,
+              ),
+            ],
           ),
         ),
       ),
