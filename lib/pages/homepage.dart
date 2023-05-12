@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:app_regra_de_tres/components/linha.dart';
 import 'package:app_regra_de_tres/components/titulo.dart';
-import 'package:app_regra_de_tres/styles/fonts.dart';
 import 'package:app_regra_de_tres/components/botao.dart';
 import 'package:app_regra_de_tres/components/campo_texto.dart';
-import 'package:app_regra_de_tres/utils/validator.dart';
+import 'package:app_regra_de_tres/styles/fonts.dart';
 import 'package:app_regra_de_tres/styles/colors.dart';
+import 'package:app_regra_de_tres/utils/validator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

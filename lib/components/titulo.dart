@@ -1,5 +1,5 @@
-import 'package:app_regra_de_tres/styles/fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:app_regra_de_tres/styles/fonts.dart';
 
 class Titulo extends StatelessWidget {
   const Titulo({

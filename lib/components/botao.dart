@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:app_regra_de_tres/components/titulo.dart';
 import 'package:app_regra_de_tres/styles/colors.dart';
-import 'package:flutter/material.dart';
 import 'package:app_regra_de_tres/styles/fonts.dart';
 
 class Botao extends StatelessWidget {

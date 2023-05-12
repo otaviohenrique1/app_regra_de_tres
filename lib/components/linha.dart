@@ -1,5 +1,5 @@
-import 'package:app_regra_de_tres/styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:app_regra_de_tres/styles/colors.dart';
 
 class Linha extends StatelessWidget {
   const Linha({
