@@ -6,7 +6,7 @@ Aplicativo que calcula regra de três simples.
 
 ## Autor
 
-- Otavio Henrique
+Otavio Henrique
 
 ## Links
 
