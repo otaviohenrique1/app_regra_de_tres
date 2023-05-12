@@ -18,43 +18,45 @@ class CampoTexto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextFormField(
-          keyboardType: keyboardType,
-          controller: controller,
-          validator: validator,
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: const TextStyle(
-              fontSize: 16,
-              fontFamily: fontFamily,
-              fontWeight: fontWeightRegular,
-            ),
-            errorStyle: const TextStyle(
-              fontSize: 16,
-              fontFamily: fontFamily,
-              fontWeight: fontWeightRegular,
-            ),
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              borderSide: BorderSide(
-                color: preto,
-                width: 2,
-                style: BorderStyle.solid,
-              ),
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              borderSide: BorderSide(
-                color: azul,
-                width: 2,
-                style: BorderStyle.solid,
-              ),
-            ),
+    BorderStyle solid = BorderStyle.solid;
+    const BorderRadius borderRadiusCircular =
+        BorderRadius.all(Radius.circular(8));
+    double fontSize = 16;
+    double borderWidth = 2;
+
+    return TextFormField(
+      keyboardType: keyboardType,
+      controller: controller,
+      validator: validator,
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: TextStyle(
+          fontSize: fontSize,
+          fontFamily: fontFamily,
+          fontWeight: fontWeightRegular,
+        ),
+        errorStyle: TextStyle(
+          fontSize: fontSize,
+          fontFamily: fontFamily,
+          fontWeight: fontWeightRegular,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: borderRadiusCircular,
+          borderSide: BorderSide(
+            color: preto,
+            width: borderWidth,
+            style: solid,
           ),
         ),
-      ],
+        focusedBorder: OutlineInputBorder(
+          borderRadius: borderRadiusCircular,
+          borderSide: BorderSide(
+            color: azul,
+            width: borderWidth,
+            style: solid,
+          ),
+        ),
+      ),
     );
   }
 }
