@@ -1,3 +1,5 @@
+import 'package:app_regra_de_tres/components/titulo.dart';
+import 'package:app_regra_de_tres/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:app_regra_de_tres/styles/fonts.dart';
 
@@ -27,14 +29,11 @@ class Botao extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text(
-        label,
-        style: TextStyle(
-          color: fontColor,
-          fontSize: 16,
-          fontFamily: fontFamily,
-          fontWeight: fontWeightBold,
-        ),
+      child: Titulo(
+        titulo: label,
+        fontSize: 16,
+        color: branco,
+        fontWeight: fontWeightBold,
       ),
     );
   }

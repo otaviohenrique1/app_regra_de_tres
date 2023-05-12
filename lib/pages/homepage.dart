@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:app_regra_de_tres/components/linha.dart';
+import 'package:app_regra_de_tres/components/titulo.dart';
+import 'package:app_regra_de_tres/styles/fonts.dart';
 import 'package:app_regra_de_tres/components/botao.dart';
 import 'package:app_regra_de_tres/components/campo_texto.dart';
 import 'package:app_regra_de_tres/utils/validator.dart';
@@ -38,12 +41,55 @@ class _HomePageState extends State<HomePage> {
   String valorLabelX = "X";
   String valorLabelResultado = "??";
 
+  void onSubmitForm() {
+    if (formKey.currentState!.validate()) {
+      setState(() {
+        a = double.parse(_campoAController.text);
+        b = double.parse(_campoBController.text);
+        c = double.parse(_campoCController.text);
+        x = _campoXController.text;
+
+        valorLabelA = a.toString();
+        valorLabelB = b.toString();
+        valorLabelC = c.toString();
+        valorLabelX = x;
+
+        double resultado = (b * c) / a;
+        valorLabelResultado = resultado.toString();
+      });
+    }
+  }
+
+  void onResetForm() {
+    setState(() {
+      formKey.currentState!.reset();
+      a = 0;
+      b = 0;
+      c = 0;
+      x = "";
+      valorLabelA = "A";
+      valorLabelB = "B";
+      valorLabelC = "C";
+      valorLabelX = "X";
+      valorLabelResultado = "??";
+      _campoAController.text = "";
+      _campoBController.text = "";
+      _campoCController.text = "";
+      _campoXController.text = "";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: azul1,
-        title: const Text("Regra de Três", style: TextStyle(color: branco)),
+        backgroundColor: azul,
+        title: const Titulo(
+          titulo: "Regra de Três",
+          fontSize: 22,
+          color: branco,
+          fontWeight: fontWeightRegular,
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -64,13 +110,7 @@ class _HomePageState extends State<HomePage> {
                             validator: validaCampoVazio,
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        Container(
-                          width: 32,
-                          height: 8,
-                          color: preto,
-                        ),
-                        const SizedBox(width: 16),
+                        const Linha(width: 48, height: 8),
                         Expanded(
                           child: CampoTexto(
                             hintText: "B",
@@ -92,13 +132,7 @@ class _HomePageState extends State<HomePage> {
                             validator: validaCampoVazio,
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        Container(
-                          width: 32,
-                          height: 8,
-                          color: preto,
-                        ),
-                        const SizedBox(width: 16),
+                        const Linha(width: 48, height: 8),
                         Expanded(
                           child: CampoTexto(
                             hintText: "X",
@@ -114,52 +148,18 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Expanded(
                           child: Botao(
-                            onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                setState(() {
-                                  a = double.parse(_campoAController.text);
-                                  b = double.parse(_campoBController.text);
-                                  c = double.parse(_campoCController.text);
-                                  x = _campoXController.text;
-
-                                  valorLabelA = a.toString();
-                                  valorLabelB = b.toString();
-                                  valorLabelC = c.toString();
-                                  valorLabelX = x;
-
-                                  double resultado = (b * c) / a;
-                                  valorLabelResultado = resultado.toString();
-                                });
-                              }
-                            },
+                            onPressed: onSubmitForm,
                             label: "Calcular",
-                            backgroundColor: azul1,
+                            backgroundColor: azul,
                             fontColor: branco,
                           ),
                         ),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Botao(
-                            onPressed: () {
-                              setState(() {
-                                formKey.currentState!.reset();
-                                a = 0;
-                                b = 0;
-                                c = 0;
-                                x = "";
-                                valorLabelA = "A";
-                                valorLabelB = "B";
-                                valorLabelC = "C";
-                                valorLabelX = "X";
-                                valorLabelResultado = "??";
-                                _campoAController.text = "";
-                                _campoBController.text = "";
-                                _campoCController.text = "";
-                                _campoXController.text = "";
-                              });
-                            },
+                            onPressed: onResetForm,
                             label: "Limpar",
-                            backgroundColor: cinza1,
+                            backgroundColor: cinza,
                             fontColor: branco,
                           ),
                         ),
@@ -175,42 +175,36 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    valorLabelA,
-                    style: const TextStyle(fontSize: 20),
-                    softWrap: true,
-                  ),
-                  Container(
-                    width: 50,
-                    height: 2,
+                  Titulo(
+                    titulo: valorLabelA,
+                    fontSize: 20,
                     color: preto,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    fontWeight: fontWeightRegular,
                   ),
-                  Text(
-                    valorLabelB,
-                    style: const TextStyle(fontSize: 20),
-                    softWrap: true,
+                  const Linha(width: 50, height: 2),
+                  Titulo(
+                    titulo: valorLabelB,
+                    fontSize: 20,
+                    color: preto,
+                    fontWeight: fontWeightRegular,
                   ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    valorLabelC,
-                    style: const TextStyle(fontSize: 20),
-                    softWrap: true,
-                  ),
-                  Container(
-                    width: 50,
-                    height: 2,
+                  Titulo(
+                    titulo: valorLabelC,
+                    fontSize: 20,
                     color: preto,
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
+                    fontWeight: fontWeightRegular,
                   ),
-                  Text(
-                    valorLabelX,
-                    style: const TextStyle(fontSize: 20),
-                    softWrap: true,
+                  const Linha(width: 50, height: 2),
+                  Titulo(
+                    titulo: valorLabelX,
+                    fontSize: 20,
+                    color: preto,
+                    fontWeight: fontWeightRegular,
                   ),
                 ],
               ),
@@ -219,10 +213,11 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "X = ",
-                      style: TextStyle(fontSize: 20),
-                      softWrap: true,
+                    const Titulo(
+                      titulo: "X = ",
+                      fontSize: 20,
+                      color: preto,
+                      fontWeight: fontWeightRegular,
                     ),
                     Column(
                       children: [
@@ -232,26 +227,29 @@ class _HomePageState extends State<HomePage> {
                               bottom: BorderSide(color: preto, width: 2),
                             ),
                           ),
-                          child: Text(
-                            "($valorLabelB * $valorLabelC)",
-                            style: const TextStyle(fontSize: 20),
-                            softWrap: true,
+                          child: Titulo(
+                            titulo: "($valorLabelB * $valorLabelC)",
+                            fontSize: 20,
+                            color: preto,
+                            fontWeight: fontWeightRegular,
                           ),
                         ),
-                        Text(
-                          valorLabelA,
-                          style: const TextStyle(fontSize: 20),
-                          softWrap: true,
+                        Titulo(
+                          titulo: valorLabelA,
+                          fontSize: 20,
+                          color: preto,
+                          fontWeight: fontWeightRegular,
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
-              Text(
-                "$valorLabelX = $valorLabelResultado",
-                style: const TextStyle(fontSize: 20),
-                softWrap: true,
+              Titulo(
+                titulo: "$valorLabelX = $valorLabelResultado",
+                fontSize: 20,
+                color: preto,
+                fontWeight: fontWeightRegular,
               ),
             ],
           ),

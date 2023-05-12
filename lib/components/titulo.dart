@@ -6,32 +6,25 @@ class Titulo extends StatelessWidget {
     super.key,
     required this.titulo,
     required this.color,
-    required this.alignment,
     required this.fontSize,
     required this.fontWeight,
   });
 
   final String titulo;
   final Color color;
-  final AlignmentGeometry alignment;
   final double fontSize;
   final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: alignment,
-      child: Text(
-        titulo,
-        softWrap: true,
-        style: TextStyle(
-          color: color,
-          fontSize: fontSize,
-          // fontSize: 24,
-          fontFamily: fontFamily,
-          fontWeight: fontWeight,
-          // fontWeight: fontWeightBold,
-        ),
+    return Text(
+      titulo,
+      softWrap: true,
+      style: TextStyle(
+        color: color,
+        fontSize: fontSize,
+        fontFamily: fontFamily,
+        fontWeight: fontWeight,
       ),
     );
   }

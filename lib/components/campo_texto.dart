@@ -47,7 +47,7 @@ class CampoTexto extends StatelessWidget {
             focusedBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(8)),
               borderSide: BorderSide(
-                color: azul1,
+                color: azul,
                 width: 2,
                 style: BorderStyle.solid,
               ),
