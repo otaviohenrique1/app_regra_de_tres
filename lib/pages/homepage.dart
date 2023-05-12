@@ -1,3 +1,4 @@
+import 'package:app_regra_de_tres/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:app_regra_de_tres/components/linha.dart';
 import 'package:app_regra_de_tres/components/titulo.dart';
@@ -49,13 +50,17 @@ class _HomePageState extends State<HomePage> {
         c = double.parse(_campoCController.text);
         x = _campoXController.text;
 
-        valorLabelA = a.toString();
-        valorLabelB = b.toString();
-        valorLabelC = c.toString();
+        valorLabelA = formataNumero(a);
+        valorLabelB = formataNumero(b);
+        valorLabelC = formataNumero(c);
+        // valorLabelA = a.toString();
+        // valorLabelB = b.toString();
+        // valorLabelC = c.toString();
         valorLabelX = x;
 
         double resultado = (b * c) / a;
-        valorLabelResultado = resultado.toString();
+        valorLabelResultado = formataNumero(resultado);
+        // valorLabelResultado = resultado.toString();
       });
     }
   }
