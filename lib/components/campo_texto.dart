@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:app_regra_de_tres/styles/colors.dart';
 import 'package:app_regra_de_tres/styles/fonts.dart';
-import 'package:flutter/material.dart';
 
 class CampoTexto extends StatelessWidget {
   const CampoTexto({
@@ -8,8 +8,8 @@ class CampoTexto extends StatelessWidget {
     required this.controller,
     required this.hintText,
     required this.label,
+    required this.keyboardType,
     this.validator,
-    this.keyboardType,
   });
 
   final String label;
