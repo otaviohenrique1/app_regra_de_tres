@@ -1,4 +1,3 @@
-import 'package:app_regra_de_tres/utils/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:app_regra_de_tres/components/linha.dart';
 import 'package:app_regra_de_tres/components/titulo.dart';
@@ -6,6 +5,7 @@ import 'package:app_regra_de_tres/components/botao.dart';
 import 'package:app_regra_de_tres/components/campo_texto.dart';
 import 'package:app_regra_de_tres/styles/fonts.dart';
 import 'package:app_regra_de_tres/styles/colors.dart';
+import 'package:app_regra_de_tres/utils/helpers.dart';
 import 'package:app_regra_de_tres/utils/validator.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,14 +53,10 @@ class _HomePageState extends State<HomePage> {
         valorLabelA = formataNumero(a);
         valorLabelB = formataNumero(b);
         valorLabelC = formataNumero(c);
-        // valorLabelA = a.toString();
-        // valorLabelB = b.toString();
-        // valorLabelC = c.toString();
         valorLabelX = x;
 
         double resultado = (b * c) / a;
         valorLabelResultado = formataNumero(resultado);
-        // valorLabelResultado = resultado.toString();
       });
     }
   }
@@ -77,10 +73,10 @@ class _HomePageState extends State<HomePage> {
       valorLabelC = "C";
       valorLabelX = "X";
       valorLabelResultado = "??";
-      _campoAController.text = "";
-      _campoBController.text = "";
-      _campoCController.text = "";
-      _campoXController.text = "";
+      _campoAController.clear();
+      _campoBController.clear();
+      _campoCController.clear();
+      _campoXController.clear();
     });
   }
 
