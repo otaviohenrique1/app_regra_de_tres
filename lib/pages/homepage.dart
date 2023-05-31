@@ -45,18 +45,45 @@ class _HomePageState extends State<HomePage> {
   void onSubmitForm() {
     if (formKey.currentState!.validate()) {
       setState(() {
-        a = double.parse(_campoAController.text);
-        b = double.parse(_campoBController.text);
-        c = double.parse(_campoCController.text);
-        x = _campoXController.text;
+        try {
+          a = double.parse(_campoAController.text);
+          b = double.parse(_campoBController.text);
+          c = double.parse(_campoCController.text);
+          x = _campoXController.text;
 
-        valorLabelA = formataNumero(a);
-        valorLabelB = formataNumero(b);
-        valorLabelC = formataNumero(c);
-        valorLabelX = x;
+          valorLabelA = formataNumero(a);
+          valorLabelB = formataNumero(b);
+          valorLabelC = formataNumero(c);
+          valorLabelX = x;
 
-        double resultado = (b * c) / a;
-        valorLabelResultado = formataNumero(resultado);
+          double resultado = (b * c) / a;
+          valorLabelResultado = formataNumero(resultado);
+        } catch (e) {
+          showDialog<String>(
+            context: context,
+            builder: (BuildContext context) => AlertDialog(
+              title: const Text('Aviso!'),
+              content: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Os campos numericos aceitam apenas valores numericos.'),
+                ],
+              ),
+              icon: const Icon(
+                Icons.warning_amber_rounded,
+                size: 64,
+              ),
+              iconColor: Colors.red,
+              actions: <Widget>[
+                TextButton(
+                  // onPressed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: const Text('Fechar'),
+                ),
+              ],
+            ),
+          );
+        }
       });
     }
   }
