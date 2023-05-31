@@ -1,10 +1,7 @@
-bool validaValor(String? value) {
-  return (value == null || value.isEmpty);
-}
-
 String? validaCampoVazio(String? value) {
-  if (validaValor(value)) {
+  if (value == null || value.isEmpty) {
     return "Campo vazio";
+  } else {
+    return null;
   }
-  return null;
 }
